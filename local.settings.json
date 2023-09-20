@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "ENCRYPTION_KEY_SECRET": "6p.1V2p;0dV=(hS%*Zuj",
+    "AzureWebJobs.ReceiveInvoice.Disabled": "false",
+    "CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=dbnlcredentialmanager;AccountKey=wc6Nrv4UieZKD/GT6179rzFkq3w3oVAbONhz8SoCzmkfWritn0cALz+XqhDK4DyznlNWZSo5WtKG+AStg+5yuQ==;EndpointSuffix=core.windows.net",
+    "TABLE_NAME": "credentials"
+  }
+}
