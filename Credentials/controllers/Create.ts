@@ -1,5 +1,5 @@
 import { HttpRequest } from "@azure/functions";
-import { checkIfIdConnectionTypeIsString, checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
+import { checkIfTypeIsString, checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
 import Credential from '../../_common/models/Credential.model';
 import { Password } from '../models/Password';
 
@@ -11,7 +11,10 @@ export const create = async (req: HttpRequest) => {
         checkRequestBodyParamsForCreateOrUpdate(id_connection, password);
 
         // Check connection
-        checkIfIdConnectionTypeIsString(id_connection);
+        checkIfTypeIsString(id_connection, 'id_connection');
+
+        // Check password
+        checkIfTypeIsString(password, 'password');
 
         // Check if row with id_connection already exists
         const response_from_db = await Credential.get(id_connection);

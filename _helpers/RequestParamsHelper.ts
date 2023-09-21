@@ -39,14 +39,20 @@ export const checkRequestQueryParamsForGetOrRemove = (id_connection: string) => 
     }
 }
 
-export const checkIfIdConnectionTypeIsString = (id_connection: any) => {
-    if (typeof id_connection !== 'string') {
+/**
+ * Checks if a value is of type string and throws an error if it's not.
+ * @param value - The value to check.
+ * @param field_name - The name of the field being checked (used in the error message).
+ * @throws Throws a 400 Bad Request error if the value is not a string.
+ */
+export const checkIfTypeIsString = (value: any, field_name: string) => {
+    if (typeof value !== 'string') {
         throw {
             status: 400,
             body: {
                 status: 'Error',
-                description: 'Invalid data format: id_connection must be a string'
+                description: `Invalid data format: ${field_name} must be a string.`
             }
         };
     }
-}
+};
