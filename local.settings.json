@@ -6,6 +6,9 @@
     "ENCRYPTION_KEY_SECRET": "6p.1V2p;0dV=(hS%*Zuj",
     "AzureWebJobs.ReceiveInvoice.Disabled": "false",
     "CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=dbnlcredentialmanager;AccountKey=wc6Nrv4UieZKD/GT6179rzFkq3w3oVAbONhz8SoCzmkfWritn0cALz+XqhDK4DyznlNWZSo5WtKG+AStg+5yuQ==;EndpointSuffix=core.windows.net",
-    "TABLE_NAME": "credentials"
+    "TABLE_NAME": "credentials",
+    "API_URL": "https://ir.lvisnet.fi:443",
+    "API_ID_URL": "api://210470aa-95fd-4a9a-a071-0020129dec2c",
+    "NAGIOS_IP":"51.144.181.25"
   }
 }
