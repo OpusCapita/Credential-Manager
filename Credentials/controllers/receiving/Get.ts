@@ -18,10 +18,10 @@ export const getReceive = async (req: HttpRequest) => {
 
         if (!response_from_db) {
             return {
-                status: 404,
+                status: 403,
                 body: {
                     status: 'Fail',
-                    description: 'Resource with the provided uuid not exists. ( Receiving Username )'
+                    description: "Username not found."
                 }
             };
         }
