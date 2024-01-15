@@ -3,7 +3,6 @@ type RequertParamsType = 'body' | 'query';
 const returnRequiredParamsErrorMessage = (params: Array<string>, source: RequertParamsType) => `Missing some required ${source.toString()} params ( check: ${params.join(', ')} ).`;
 
 export const checkRequestQueryParamsForDelete = (id_connection: string) => {
-    // Check fi required query params exists
     if (!id_connection) {
         throw {
             status: 400,
@@ -34,6 +33,18 @@ export const checkRequestQueryParamsForGetOrRemove = (id_connection: string) => 
             body: {
                 status: 'Error',
                 description: returnRequiredParamsErrorMessage(['id_connection'], 'body')
+            }
+        };
+    }
+}
+
+export const checkRequestBodyParamsForGet = (uuid: string) => {
+    if (!uuid) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Error',
+                description: returnRequiredParamsErrorMessage(['uuid'], 'body')
             }
         };
     }
