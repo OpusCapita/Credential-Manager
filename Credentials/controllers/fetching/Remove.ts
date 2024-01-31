@@ -1,6 +1,7 @@
+import { checkIfTypeIsString, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelper";
+
+import Credential from '../../../_common/models/Credential.model';
 import { HttpRequest } from "@azure/functions";
-import { checkIfTypeIsString, checkRequestQueryParamsForGetOrRemove } from "../../_helpers/RequestParamsHelper";
-import Credential from '../../_common/models/Credential.model';
 
 export const remove = async (req: HttpRequest) => {
     const { id_connection } = req.body;

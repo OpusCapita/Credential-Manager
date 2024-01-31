@@ -1,7 +1,8 @@
+import { checkIfTypeIsString, checkRequestBodyParamsForCreateOrUpdate } from "../../../_helpers/RequestParamsHelper";
+
+import Credential from '../../../_common/models/Credential.model';
 import { HttpRequest } from "@azure/functions";
-import { checkIfTypeIsString, checkRequestBodyParamsForCreateOrUpdate } from "../../_helpers/RequestParamsHelper";
-import Credential from '../../_common/models/Credential.model';
-import { Password } from "../models/Password";
+import { Password } from "../../models/Password";
 
 export const update = async (req: HttpRequest) => {
     const { id_connection, password } = req.body;
