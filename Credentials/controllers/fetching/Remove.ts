@@ -20,7 +20,7 @@ export const remove = async (req: HttpRequest) => {
             return {
                 status: 404,
                 body: {
-                    status: 'Fail',
+                    status: 'Not found',
                     description: 'Resource with the provided id_connection does not exist.'
                 }
             };
@@ -36,7 +36,7 @@ export const remove = async (req: HttpRequest) => {
         return {
             status: 500,
             body: {
-                status: 'Error',
+                status: 'Internal error',
                 description: 'An unexpected error occurred. Please try again later.'
             }
         };

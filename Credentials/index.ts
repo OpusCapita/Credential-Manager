@@ -34,9 +34,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             break;
         default:
             context.res = {
-                status: 500,
+                status: 405,
                 body: {
-                    status: 'Internal error.'
+                    status: 'Method not allowed.'
                 }
             };
 

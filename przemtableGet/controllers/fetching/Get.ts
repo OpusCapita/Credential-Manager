@@ -1,27 +1,29 @@
-import { checkIfTypeIsString, checkRequestBodyParamsForGet, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelper";
+import { checkIfTypeIsString, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelperPrzemtable";
 
 import { HttpRequest } from "@azure/functions";
-import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
+import CredentialPrzemtable from "../../../_common/models/CredentialPrzemtable.model";
 
-export const getReceive = async (req: HttpRequest) => {
-    const { uuid } = req.body;
+export const get = async (req: HttpRequest) => {
+    const { PartitionKey } = req.query;
 
     try {
         // Chack body params
-        checkRequestBodyParamsForGet(uuid);
+        checkRequestQueryParamsForGetOrRemove(PartitionKey);
 
         // Check connection
-        checkIfTypeIsString(uuid, 'uuid');
+        checkIfTypeIsString(PartitionKey, 'PartitionKey');
 
+                
         // Check if row with uuid already exists
-        const response_from_db = await ReceivingCredential.get(uuid);
+        const response_from_db = await CredentialPrzemtable.get(PartitionKey);
 
         if (!response_from_db) {
             return {
                 status: 404,
                 body: {
                     status: 'Not found',
-                    description: "Username not found."
+                    PartitionKey: PartitionKey,
+                    description: 'Resource with the provided PartitionKey not exists.'
                 }
             };
         }
@@ -30,6 +32,7 @@ export const getReceive = async (req: HttpRequest) => {
             status: 200,
             body: {
                 status: 'OK',
+                PartitionKey: PartitionKey,
                 payload: response_from_db
             }
         };

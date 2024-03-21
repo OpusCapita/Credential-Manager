@@ -1,4 +1,4 @@
-import { checkIfTypeIsString, checkRequestBodyParamsForGet, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelper";
+import { checkIfTypeIsString, checkRequestBodyParamsForGet, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelperPrzemtable";
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
@@ -18,9 +18,9 @@ export const getReceive = async (req: HttpRequest) => {
 
         if (!response_from_db) {
             return {
-                status: 404,
+                status: 403,
                 body: {
-                    status: 'Not found',
+                    status: 'Forbidden',
                     description: "Username not found."
                 }
             };
@@ -30,6 +30,7 @@ export const getReceive = async (req: HttpRequest) => {
             status: 200,
             body: {
                 status: 'OK',
+                uuid: uuid,
                 payload: response_from_db
             }
         };

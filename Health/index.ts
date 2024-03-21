@@ -3,13 +3,14 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { ErrorLogs } from "../_common/models/ErrorLogs.model";
 import { IPValidator } from "../_common/models/IPValidator.model";
 import { checkJWT } from "../_common/utils/CheckJWT.utils";
+import { VERSION } from "../_common/parameters/Parameters";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest) {
     let response: any = { // TODO: Add the correct response type
         status: 200,
         body: {
             status: 'OK',
-            version: '1.0.1'
+            version: VERSION
         }
     };
 
