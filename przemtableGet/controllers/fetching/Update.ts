@@ -46,9 +46,9 @@ export const update = async (req: HttpRequest) => {
     }
 
     return {
-        status: 200,
+        status: 201,
         body: {
-            status: 'OK',
+            status: 'Created',
             PartitionKey: PartitionKey,
             description: 'Resource updated successfully.'
         }
