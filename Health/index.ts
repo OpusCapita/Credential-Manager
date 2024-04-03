@@ -49,3 +49,5 @@ const handleHealthError = (error: any) => {
 }
 
 export default httpTrigger;
+
+// test
