@@ -30,7 +30,7 @@ export default class Credential {
         await new Promise((resolve, reject) => {
             this.table_service.insertEntity(this.table_name, object, function (error, result, response) {
                 if (error) {
-                    ErrorLogs.insert({}, `Problem when trying to create new object: ${error}`, '--- Create ---');
+                    ErrorLogs.insert(object, `Problem when trying to create new object: ${error}`, '--- Create ---');
 
                     reject(error);
                 }
@@ -54,7 +54,7 @@ export default class Credential {
         const results: any = await new Promise((resolve, reject) => {
             this.table_service.queryEntities(this.table_name, query, null, (error, result) => {
                 if (error) {
-                    ErrorLogs.insert({}, `Problem when trying to get object: ${error}`, '--- Get ---');
+                    ErrorLogs.insert(query, `Problem when trying to get object: ${error}`, '--- Get ---');
 
                     reject(error);
                 }
@@ -76,7 +76,7 @@ export default class Credential {
     static update = async (entity: any) => await new Promise((resolve, reject) => {
         this.table_service.replaceEntity(this.table_name, entity, (error, result) => {
             if (error) {
-                ErrorLogs.insert({}, `Problem when trying to update object: ${error}`, '--- Update ---');
+                ErrorLogs.insert(entity, `Problem when trying to update object: ${error}`, '--- Update ---');
 
                 reject(error);
             }
@@ -95,7 +95,7 @@ export default class Credential {
     static delete = async (entity: object) => await new Promise((resolve, reject) => {
         this.table_service.deleteEntity(this.table_name, entity, (error, response) => {
             if (error) {
-                ErrorLogs.insert({}, `Problem when trying to remove object: ${error}`, '--- Remove ---');
+                ErrorLogs.insert(entity, `Problem when trying to remove object: ${error}`, '--- Remove ---');
 
                 reject(error);
             }
