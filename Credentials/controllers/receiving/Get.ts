@@ -1,4 +1,5 @@
-import { checkIfTypeIsString, checkRequestBodyParamsForGet, checkRequestQueryParamsForGetOrRemove } from "../../../_helpers/RequestParamsHelper";
+import { checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+import { checkReceivingRequestBodyParamsForGet } from '../../../_common/utils/ReceivingRequest.utils';
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
@@ -8,7 +9,7 @@ export const getReceive = async (req: HttpRequest) => {
 
     try {
         // Chack body params
-        checkRequestBodyParamsForGet(uuid);
+        checkReceivingRequestBodyParamsForGet(uuid);
 
         // Check connection
         checkIfTypeIsString(uuid, 'uuid');
