@@ -1,6 +1,18 @@
 import { returnRequiredParamsErrorMessage } from './Request.utils';
 
-export const checkReceivingRequestBodyParamsForGet = (uuid: string) => {
+export const checkReceivingRequestQueryParamsForGet = (uuid: string) => {
+    if (!uuid) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                description: returnRequiredParamsErrorMessage(['uuid'], 'query')
+            }
+        };
+    }
+}
+
+export const checkReceivingRequestBodyParamsForDelete = (uuid: string) => {
     if (!uuid) {
         throw {
             status: 400,
@@ -12,3 +24,14 @@ export const checkReceivingRequestBodyParamsForGet = (uuid: string) => {
     }
 }
 
+export const checkReceivingRequestBodyParamsForCreateOrUpdate = (uuid: string, username: string) => {
+    if (!uuid || !username) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                description: returnRequiredParamsErrorMessage(['uuid', 'username'], 'body')
+            }
+        };
+    }
+}
