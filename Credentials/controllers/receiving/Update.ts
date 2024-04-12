@@ -3,7 +3,6 @@ import { checkIfRequestBodyExists, checkIfTypeIsString } from "../../../_common/
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
 import { checkReceivingRequestBodyParamsForCreateOrUpdate } from "../../../_common/utils/ReceivingRequest.utils";
-import { throwIfDatabaseResourceNotExists } from "../../../_common/utils/DatabaseResponse.utils";
 
 export const updateReceive = async (req: HttpRequest) => {
     // Check if request body exists
@@ -23,14 +22,16 @@ export const updateReceive = async (req: HttpRequest) => {
     // Check if row with uuid already exists
     let response_from_db = await ReceivingCredential.get(uuid.toString());
 
-    // If not exists throw error 404 - Not found
-    throwIfDatabaseResourceNotExists(response_from_db, 'uuid');
+    if (!response_from_db) {
+        await ReceivingCredential.create(uuid, username);
+    }
+    else {
+        // Update object properties
+        response_from_db.username = username;
+        response_from_db.updated_at = new Date().toISOString();
 
-    // Update object properties
-    response_from_db.username = username;
-    response_from_db.updated_at = new Date().toISOString();
-
-    await ReceivingCredential.update(response_from_db);
+        await ReceivingCredential.update(response_from_db);
+    }
 
     return {
         status: 200,
