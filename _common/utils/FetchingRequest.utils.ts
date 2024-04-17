@@ -6,6 +6,7 @@ export const checkFetchingRequestBodyParamsForDelete = (id_connection: string) =
             status: 400,
             body: {
                 status: 'Bad Request',
+                field_name: 'id_connection',
                 description: returnRequiredParamsErrorMessage(['id_connection'], 'body')
             },
             headers: {
@@ -36,6 +37,7 @@ export const checkFetchingRequestQueryParamsForGetOrDelete = (id_connection: str
             status: 400,
             body: {
                 status: 'Bad Request',
+                field_name: 'id_connection',
                 description: returnRequiredParamsErrorMessage(['id_connection'], 'query')
             },
             headers: {

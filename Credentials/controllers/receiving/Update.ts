@@ -29,6 +29,7 @@ export const updateReceive = async (req: HttpRequest) => {
             status: 404,
             body: {
                 status: 'Not found',
+                field_name: 'id_account',
                 description: 'Resource with the provided id_account does not exist.'
             },
             headers: {

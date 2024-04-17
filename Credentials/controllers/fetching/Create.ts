@@ -1,9 +1,9 @@
 import { checkIfRequestBodyExists, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
-import { checkFetchingRequestBodyParamsForCreateOrUpdate } from "../../../_common/utils/FetchingRequest.utils";
 
 import Credential from '../../../_common/models/Credential.model';
 import { HttpRequest } from "@azure/functions";
 import { Password } from '../../models/Password';
+import { checkFetchingRequestBodyParamsForCreateOrUpdate } from "../../../_common/utils/FetchingRequest.utils";
 import { throwIfDatabaseResourceExists } from "../../../_common/utils/DatabaseResponse.utils";
 
 export const create = async (req: HttpRequest) => {
@@ -36,6 +36,9 @@ export const create = async (req: HttpRequest) => {
         body: {
             status: 'Created',
             description: 'New resource created successfully.'
+        },
+        headers: {
+            'Content-Type': 'application/json'
         }
     };
 }

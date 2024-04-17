@@ -21,7 +21,8 @@ export const getReceive = async (req: HttpRequest) => {
                 status: 404,
                 body: {
                     status: 'Not found',
-                    description: 'Resource with the provided id_connection does not exist.'
+                    field_name: 'id_account',
+                    description: 'Resource with the provided id_account does not exist.'
                 },
                 headers: {
                     'Content-Type': 'application/json'
