@@ -3,6 +3,7 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { create } from "./controllers/fetching/Create";
 import { createReceive } from "./controllers/receiving/Create";
 import { get } from "./controllers/fetching/Get";
+import { getAllReceive } from "./controllers/receiving/GetAll";
 import { getReceive } from "./controllers/receiving/Get";
 import { remove } from "./controllers/fetching/Remove";
 import { removeReceive } from "./controllers/receiving/Remove";
@@ -20,7 +21,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
                     break;
                 case 'GET':
-                    context.res = await getReceive(req);
+                    const { get_list } = req.query;
+
+                    context.res = get_list ? await getAllReceive(req) : await getReceive(req);
 
                     break;
                 case 'PUT':

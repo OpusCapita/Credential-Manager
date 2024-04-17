@@ -69,6 +69,34 @@ export default class ReceivingCredential {
     }
 
     /**
+     * Retrieves all receiving credentials from the database.
+     * @returns {Promise<Array<{ uuid: string, id_account: string, username: string }>>} A promise that resolves to an array of receiving credentials.
+     */
+    static getAll = async () => {
+        // Get objects from DB
+        const results: any = await new Promise((resolve, reject) => {
+            const query = new AzureStorage.TableQuery().select('uuid', 'username', 'id_account');
+            this.table_service.queryEntities(this.table_name, query, null, (error, result) => {
+                if (error) {
+                    ErrorLogs.insert({}, `Problem when trying to get all objects: ${error}`, '--- Get All Receiving Credentials ---');
+
+                    reject(error);
+                }
+                else {
+                    resolve(result);
+                }
+            });
+        });
+
+        // Transform the results to the desired format
+        return results.entries.map(entry => ({
+            uuid: entry.uuid._,
+            id_account: entry.id_account._,
+            username: entry.username._
+        }));
+    }
+
+    /**
      * Update object
      * @param {object} entity - Object from DB
      * @return {void} - Return void
