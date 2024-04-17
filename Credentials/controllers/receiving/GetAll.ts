@@ -10,6 +10,9 @@ export const getAllReceive = async (req: HttpRequest) => {
             body: {
                 status: 'OK',
                 payload: response_from_db
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
