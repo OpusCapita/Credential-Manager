@@ -1,20 +1,20 @@
+import { checkIfTypeIsNumber, checkIfTypeIsString } from '../../../_common/utils/Request.utils';
+
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
-import { checkIfTypeIsString } from '../../../_common/utils/Request.utils';
 import { checkReceivingRequestBodyParamsForDelete } from "../../../_common/utils/ReceivingRequest.utils";
 
 export const removeReceive = async (req: HttpRequest) => {
-    const { uuid } = req.body;
+    const { id_account } = req.body;
 
     try {
         // Chack body params
-        checkReceivingRequestBodyParamsForDelete(uuid);
+        checkReceivingRequestBodyParamsForDelete(id_account);
 
-        // Check connection
-        checkIfTypeIsString(uuid, 'uuid');
+        checkIfTypeIsNumber(id_account, 'id_account');
 
-        // Check if row with uuid already exists
-        let response_from_db = await ReceivingCredential.get(uuid.toString());
+        // Check if row with id_account already exists
+        let response_from_db = await ReceivingCredential.get(Number(id_account));
 
         if (!response_from_db) {
             return {
