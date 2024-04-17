@@ -24,13 +24,13 @@ export const checkReceivingRequestBodyParamsForDelete = (uuid: string) => {
     }
 }
 
-export const checkReceivingRequestBodyParamsForCreateOrUpdate = (uuid: string, username: string) => {
-    if (!uuid || !username) {
+export const checkReceivingRequestBodyParamsForCreateOrUpdate = (uuid: string, username: string, id_account: number) => {
+    if (!uuid || !username || !id_account) {
         throw {
             status: 400,
             body: {
                 status: 'Bad Request',
-                description: returnRequiredParamsErrorMessage(['uuid', 'username'], 'body')
+                description: returnRequiredParamsErrorMessage(['uuid', 'username, id_account'], 'body')
             }
         };
     }

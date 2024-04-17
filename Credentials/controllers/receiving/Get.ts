@@ -1,27 +1,27 @@
+import { checkIfTypeIsNumber, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
-import { checkIfTypeIsString } from "../../../_common/utils/Request.utils";
 import { checkReceivingRequestQueryParamsForGet } from '../../../_common/utils/ReceivingRequest.utils';
 
 export const getReceive = async (req: HttpRequest) => {
-    const { uuid } = req.query;
+    const { id_account } = req.query;
 
     try {
         // Chack body params
-        checkReceivingRequestQueryParamsForGet(uuid);
+        checkReceivingRequestQueryParamsForGet(id_account);
 
-        // Check connection
-        checkIfTypeIsString(uuid, 'uuid');
+        checkIfTypeIsNumber(id_account, 'id_account');
 
-        // Check if row with uuid already exists
-        const response_from_db = await ReceivingCredential.get(uuid);
+        // Check if row with id_account already exists
+        const response_from_db = await ReceivingCredential.get(Number(id_account));
 
         if (!response_from_db) {
             return {
                 status: 404,
                 body: {
                     status: 'Not found',
-                    description: "Username not found."
+                    description: 'Resource with the provided id_connection does not exist.'
                 }
             };
         }

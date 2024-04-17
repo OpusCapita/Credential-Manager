@@ -9,17 +9,20 @@ export default class ReceivingCredential {
     private static table_service = AzureStorage.createTableService(this.connection_string);
 
     /**
-     * Create new object
-     * @param {string} uuid - uuid
-     * @param {string} username - Client username
-     * @return {void} - Return void
-    **/
-    static create = async (uuid: string, username: string) => {
+     * Creates a new ReceivingCredential entity.
+     * 
+     * @param id_account - The account ID.
+     * @param uuid - The UUID of the credential.
+     * @param username - The username associated with the credential.
+     * @returns A promise that resolves with the result of the creation.
+     */
+    static create = async (id_account: number, uuid: string, username: string) => {
         // Create an entity object
         const object = {
-            RowKey: uuid,
-            PartitionKey: uuid,
+            RowKey: id_account,
+            PartitionKey: id_account,
             uuid: uuid,
+            id_account: id_account,
             username: username,
             created_at: new Date().toISOString()
         };
@@ -41,12 +44,12 @@ export default class ReceivingCredential {
 
     /**
      * Get object
-     * @param {string} uuid - Client uuid
+     * @param {string} id_account - Account ID
      * @return {object} - Return object from DB
      **/
-    static get = async (uuid: string) => {
+    static get = async (id_account: number) => {
         // Define the query
-        const query = new AzureStorage.TableQuery().where('uuid eq ?', uuid);
+        const query = new AzureStorage.TableQuery().where('id_account eq ?', id_account);
 
         // Get objects from DB
         const results: any = await new Promise((resolve, reject) => {
