@@ -15,6 +15,7 @@ export const checkIfTypeIsString = (value: any, field_name: string) => {
             status: 400,
             body: {
                 status: 'Bad Request',
+                field_name: field_name,
                 description: `Invalid data format: ${field_name} must be a string.`
             },
             headers: {
@@ -56,6 +57,7 @@ export const checkIfTypeIsNumber = (value: any, field_name: string) => {
             status: 400,
             body: {
                 status: 'Bad Request',
+                field_name: field_name,
                 description: `Invalid data format: ${field_name} must be a number.`
             },
             headers: {

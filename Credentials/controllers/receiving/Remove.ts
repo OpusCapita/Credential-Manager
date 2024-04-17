@@ -21,7 +21,7 @@ export const removeReceive = async (req: HttpRequest) => {
                 status: 404,
                 body: {
                     status: 'Not found',
-                    description: 'Resource with the provided id_connection does not exist.'
+                    description: 'Resource with the provided id_account does not exist.'
                 },
                 headers: {
                     'Content-Type': 'application/json'
