@@ -7,6 +7,9 @@ export const checkFetchingRequestBodyParamsForDelete = (id_connection: string) =
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['id_connection'], 'body')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -19,6 +22,9 @@ export const checkFetchingRequestBodyParamsForCreateOrUpdate = (id_connection: s
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['id_connection', 'password'], 'body')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -31,6 +37,9 @@ export const checkFetchingRequestQueryParamsForGetOrDelete = (id_connection: str
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['id_connection'], 'query')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }

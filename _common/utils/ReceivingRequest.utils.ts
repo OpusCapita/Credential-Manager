@@ -7,6 +7,9 @@ export const checkReceivingRequestQueryParamsForGet = (uuid: string) => {
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['uuid'], 'query')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -19,6 +22,9 @@ export const checkReceivingRequestBodyParamsForDelete = (uuid: string) => {
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['uuid'], 'body')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -31,6 +37,9 @@ export const checkReceivingRequestBodyParamsForCreateOrUpdate = (uuid: string, u
             body: {
                 status: 'Bad Request',
                 description: returnRequiredParamsErrorMessage(['uuid', 'username, id_account'], 'body')
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }

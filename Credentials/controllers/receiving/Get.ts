@@ -22,6 +22,9 @@ export const getReceive = async (req: HttpRequest) => {
                 body: {
                     status: 'Not found',
                     description: 'Resource with the provided id_connection does not exist.'
+                },
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
         }
@@ -31,6 +34,9 @@ export const getReceive = async (req: HttpRequest) => {
             body: {
                 status: 'OK',
                 payload: response_from_db
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -44,6 +50,9 @@ export const getReceive = async (req: HttpRequest) => {
             body: {
                 status: 'Internal error',
                 description: 'An unexpected error occurred. Please try again later.'
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }

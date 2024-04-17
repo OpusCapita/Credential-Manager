@@ -11,6 +11,9 @@ export const throwIfDatabaseResourceExists = (object: any, file_name: string) =>
             body: {
                 status: 'Conflict',
                 description: `Resource with the provided ${file_name} already exists.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -29,6 +32,9 @@ export const throwIfDatabaseResourceNotExists = (object: any, file_name: string)
             body: {
                 status: 'Not Found',
                 description: `Resource with the provided ${file_name} does not exists.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
