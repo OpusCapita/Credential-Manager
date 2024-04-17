@@ -33,6 +33,9 @@ export const createReceive = async (req: HttpRequest) => {
         body: {
             status: 'Created',
             description: 'New resource created successfully.'
+        },
+        headers: {
+            'Content-Type': 'application/json'
         }
     };
 }

@@ -30,6 +30,9 @@ export const updateReceive = async (req: HttpRequest) => {
             body: {
                 status: 'Not found',
                 description: 'Resource with the provided id_account does not exist.'
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         }
     }
@@ -47,6 +50,9 @@ export const updateReceive = async (req: HttpRequest) => {
         body: {
             status: 'OK',
             description: 'Resource updated successfully.'
+        },
+        headers: {
+            'Content-Type': 'application/json'
         }
     };
 }

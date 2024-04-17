@@ -16,6 +16,9 @@ export const checkIfTypeIsString = (value: any, field_name: string) => {
             body: {
                 status: 'Bad Request',
                 description: `Invalid data format: ${field_name} must be a string.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -33,6 +36,9 @@ export const checkIfRequestBodyExists = (body: any) => {
             body: {
                 status: 'Bad Request',
                 description: 'Request body is missing.'
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -51,6 +57,9 @@ export const checkIfTypeIsNumber = (value: any, field_name: string) => {
             body: {
                 status: 'Bad Request',
                 description: `Invalid data format: ${field_name} must be a number.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }

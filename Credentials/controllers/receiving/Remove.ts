@@ -22,6 +22,9 @@ export const removeReceive = async (req: HttpRequest) => {
                 body: {
                     status: 'Not found',
                     description: 'Resource with the provided id_connection does not exist.'
+                },
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             };
         }
@@ -38,6 +41,9 @@ export const removeReceive = async (req: HttpRequest) => {
             body: {
                 status: 'Internal error',
                 description: 'An unexpected error occurred. Please try again later.'
+            },
+            headers: {
+                'Content-Type': 'application/json'
             }
         };
     }
@@ -47,6 +53,9 @@ export const removeReceive = async (req: HttpRequest) => {
         body: {
             status: 'OK',
             description: 'Resource deleted successfully.'
+        },
+        headers: {
+            'Content-Type': 'application/json'
         }
     };
 }
