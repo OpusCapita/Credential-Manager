@@ -14,7 +14,7 @@ export const createReceive = async (req: HttpRequest) => {
     // Chack body params
     checkReceivingRequestBodyParamsForCreateOrUpdate(uuid, username, id_account);
 
-    checkIfTypeIsNumber(id_account, 'id_account');
+    checkIfTypeIsNumber(Number(id_account), 'id_account');
 
     checkIfTypeIsString(uuid, 'uuid');
 
@@ -24,7 +24,7 @@ export const createReceive = async (req: HttpRequest) => {
     const response_from_db = await ReceivingCredential.get(id_account);
 
     // If exists throw error 409 - Conflict
-    throwIfDatabaseResourceExists(response_from_db, 'uuid');
+    throwIfDatabaseResourceExists(response_from_db, 'id_account');
 
     await ReceivingCredential.create(id_account, uuid, username);
 

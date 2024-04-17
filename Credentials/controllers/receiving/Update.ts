@@ -10,7 +10,7 @@ export const updateReceive = async (req: HttpRequest) => {
 
     const { uuid, username, id_account } = req.body;
 
-    checkIfTypeIsNumber(id_account, 'id_account');
+    checkIfTypeIsNumber(Number(id_account), 'id_account');
     
     // Chack body params
     checkReceivingRequestBodyParamsForCreateOrUpdate(uuid, username, id_account);

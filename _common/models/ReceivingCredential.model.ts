@@ -2,6 +2,7 @@ import * as AzureStorage from 'azure-storage';
 
 import { CONNECTION_STRING } from '../parameters/EnvParameters';
 import { ErrorLogs } from './ErrorLogs.model';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class ReceivingCredential {
     private static table_name = 'receivingCredentials';
@@ -17,13 +18,15 @@ export default class ReceivingCredential {
      * @returns A promise that resolves with the result of the creation.
      */
     static create = async (id_account: number, uuid: string, username: string) => {
+        const rowKey = uuidv4();
+
         // Create an entity object
         const object = {
-            RowKey: id_account,
-            PartitionKey: id_account,
+            RowKey: rowKey,
+            PartitionKey: rowKey,
             uuid: uuid,
-            id_account: id_account,
             username: username,
+            id_account: id_account,
             created_at: new Date().toISOString()
         };
 
