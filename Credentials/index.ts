@@ -11,7 +11,7 @@ import { update } from "./controllers/fetching/Update";
 import { updateReceive } from "./controllers/receiving/Update";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-    const { receive } = req.query;
+    const { receive, get_list } = req.query;
 
     try {
         if (receive) {
@@ -21,8 +21,6 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
                     break;
                 case 'GET':
-                    const { get_list } = req.query;
-
                     context.res = get_list ? await getAllReceive(req) : await getReceive(req);
 
                     break;
@@ -81,6 +79,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             status: error.status || 500,
             body: error.body || {
                 status: 'Internal error'
+            },
+            headers: error.headers || {
+                'Content-Type': 'application/json'
             }
         };
     }
