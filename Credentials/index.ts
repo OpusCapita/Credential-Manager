@@ -14,6 +14,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     const { receive, get_list } = req.query;
 
     try {
+        // Check if request is for receiving
         if (receive) {
             switch (req.method) {
                 case 'POST':
@@ -47,6 +48,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             return;
         }
 
+        // Check if request is for fetching
         switch (req.method) {
             case 'POST':
                 context.res = await create(req);
