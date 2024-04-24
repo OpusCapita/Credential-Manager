@@ -11,7 +11,7 @@ export const getReceive = async (req: HttpRequest) => {
         // Chack body params
         checkReceivingRequestQueryParamsForGet(id_account);
 
-        checkIfTypeIsNumber(Number(id_account), 'id_account');
+        checkIfTypeIsNumber(id_account, 'id_account');
 
         // Check if row with id_account already exists
         const response_from_db = await ReceivingCredential.get(Number(id_account));
