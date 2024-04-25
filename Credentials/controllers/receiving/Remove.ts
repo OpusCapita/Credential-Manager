@@ -1,4 +1,4 @@
-import { checkIfTypeIsNumber, checkIfTypeIsString } from '../../../_common/utils/Request.utils';
+import { checkIfPositiveIntegerNumber } from '../../../_common/utils/Request.utils';
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
@@ -11,7 +11,7 @@ export const removeReceive = async (req: HttpRequest) => {
         // Chack body params
         checkReceivingRequestBodyParamsForDelete(id_account);
 
-        checkIfTypeIsNumber(id_account, 'id_account');
+        checkIfPositiveIntegerNumber(id_account, 'id_account');
 
         // Check if row with id_account already exists
         let response_from_db = await ReceivingCredential.get(Number(id_account));

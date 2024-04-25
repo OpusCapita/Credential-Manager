@@ -66,3 +66,49 @@ export const checkIfTypeIsNumber = (value: any, field_name: string) => {
         };
     }
 };
+
+/**
+ * Checks if a value is a positive integer.
+ * @param value - The value to be checked.
+ * @param field_name - The name of the field being checked.
+ * @throws Throws an error if the value is not a positive integer.
+ */
+export const checkIfPositiveIntegerStringOrNumber = (value: any, field_name: string) => {
+    value = Number(value);
+
+    if (typeof value !== 'number' || isNaN(value) || !Number.isInteger(value) || value < 1) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                field_name: field_name,
+                description: `Invalid data format: ${field_name} must be a positive integer.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    }
+};
+
+/**
+ * Checks if a value is a positive integer.
+ * @param value - The value to be checked.
+ * @param field_name - The name of the field being checked.
+ * @throws Throws an error if the value is not a positive integer.
+ */
+export const checkIfPositiveIntegerNumber = (value: any, field_name: string) => {
+    if (typeof value !== 'number' || isNaN(value) || !Number.isInteger(value) || value < 1) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                field_name: field_name,
+                description: `Invalid data format: ${field_name} must be a positive integer.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    }
+};

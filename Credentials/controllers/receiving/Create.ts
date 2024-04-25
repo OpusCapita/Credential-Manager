@@ -1,4 +1,4 @@
-import { checkIfRequestBodyExists, checkIfTypeIsNumber, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+import { checkIfRequestBodyExists, checkIfPositiveIntegerNumber, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
@@ -14,7 +14,7 @@ export const createReceive = async (req: HttpRequest) => {
     // Chack body params
     checkReceivingRequestBodyParamsForCreateOrUpdate(uuid, username, id_account);
 
-    checkIfTypeIsNumber(id_account, 'id_account');
+    checkIfPositiveIntegerNumber(id_account, 'id_account');
 
     checkIfTypeIsString(uuid, 'uuid');
 
