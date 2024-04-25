@@ -10,8 +10,6 @@ export const updateReceive = async (req: HttpRequest) => {
 
     const { uuid, username, id_account } = req.body;
 
-    checkIfPositiveIntegerNumber(id_account, 'id_account');
-
     // Chack body params
     checkReceivingRequestBodyParamsForCreateOrUpdate(uuid, username, id_account);
 
@@ -20,6 +18,9 @@ export const updateReceive = async (req: HttpRequest) => {
 
     // Check username
     checkIfTypeIsString(username, 'username');
+
+    // Check id_account is positive integer
+    checkIfPositiveIntegerNumber(id_account, 'id_account');
 
     // Check if row with id_account already exists
     let response_from_db = await ReceivingCredential.get(id_account);
