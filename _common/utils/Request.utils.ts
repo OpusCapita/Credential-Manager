@@ -66,3 +66,21 @@ export const checkIfTypeIsNumber = (value: any, field_name: string) => {
         };
     }
 };
+
+export const checkIfPositiveInteger = (value: any, field_name: string) => {
+    value = Number(value);
+
+    if (typeof value !== 'number' || isNaN(value) || !Number.isInteger(value)) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                field_name: field_name,
+                description: `Invalid data format: ${field_name} must be a positive integer.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    }
+};
