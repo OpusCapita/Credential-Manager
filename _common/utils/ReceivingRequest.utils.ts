@@ -44,3 +44,21 @@ export const checkReceivingRequestBodyParamsForCreateOrUpdate = (uuid: string, u
         };
     }
 }
+
+export const throwIfDuplicateObject = (response: any[], field: string, value: string | number, id_account: number) => {
+    const duplicateObject = response.find(obj => obj[field] === value && obj.id_account !== id_account);
+
+    if (duplicateObject) {
+        throw {
+            status: 400,
+            body: {
+                status: 'Bad Request',
+                field_name: field,
+                description: `An object with the same ${field} but a different id_account already exists.`
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    }
+}
