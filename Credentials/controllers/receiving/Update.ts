@@ -1,8 +1,8 @@
-import { checkIfRequestBodyExists, checkIfPositiveIntegerNumber, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+import { checkIfPositiveIntegerNumber, checkIfRequestBodyExists, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+import { checkReceivingRequestBodyParamsForCreateOrUpdate, throwIfDuplicateObject } from "../../../_common/utils/ReceivingRequest.utils";
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
-import { checkReceivingRequestBodyParamsForCreateOrUpdate } from "../../../_common/utils/ReceivingRequest.utils";
 
 export const updateReceive = async (req: HttpRequest) => {
     // Check if request body exists
@@ -39,6 +39,12 @@ export const updateReceive = async (req: HttpRequest) => {
         }
     }
     else {
+        // Check if username or uuid already exists
+        const response = await ReceivingCredential.getByUUIDOrUsername(uuid, username);
+
+        throwIfDuplicateObject(response, 'uuid', uuid, id_account);
+        throwIfDuplicateObject(response, 'username', username, id_account);
+
         // Update object properties
         response_from_db.username = username;
         response_from_db.uuid = uuid;

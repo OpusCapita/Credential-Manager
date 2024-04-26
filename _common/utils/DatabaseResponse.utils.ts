@@ -1,3 +1,5 @@
+import { error } from "console";
+
 /**
  * Throws an error if a database resource already exists.
  * @param object - The object to check if it exists.
@@ -8,8 +10,10 @@ export const throwIfDatabaseResourceExists = (object: any, file_name: string) =>
     if (object) {
         throw {
             status: 409,
+            error: true,
             body: {
                 status: 'Conflict',
+                file_name: file_name,
                 description: `Resource with the provided ${file_name} already exists.`
             },
             headers: {
@@ -29,6 +33,7 @@ export const throwIfDatabaseResourceNotExists = (object: any, file_name: string)
     if (!object) {
         throw {
             status: 404,
+            error: true,
             body: {
                 status: 'Not Found',
                 description: `Resource with the provided ${file_name} does not exists.`
