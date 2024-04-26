@@ -1,5 +1,6 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 
+import { ErrorLogs } from "../_common/models/ErrorLogs.model";
 import { create } from "./controllers/fetching/Create";
 import { createReceive } from "./controllers/receiving/Create";
 import { get } from "./controllers/fetching/Get";
@@ -86,6 +87,12 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
                 'Content-Type': 'application/json'
             }
         };
+
+        ErrorLogs.insert(
+            { error: error, req: req },
+            'Unexpected error occurred.',
+            '--- Internal error ---'
+        );
     }
 };
 

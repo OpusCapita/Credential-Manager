@@ -1,4 +1,4 @@
-import { checkIfRequestBodyExists, checkIfPositiveIntegerNumber, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
+import { checkIfPositiveIntegerNumber, checkIfRequestBodyExists, checkIfTypeIsString } from "../../../_common/utils/Request.utils";
 
 import { HttpRequest } from "@azure/functions";
 import ReceivingCredential from '../../../_common/models/ReceivingCredential.model';
@@ -21,10 +21,16 @@ export const createReceive = async (req: HttpRequest) => {
     checkIfTypeIsString(username, 'username');
 
     // Check if row with id_account already exists
-    const response_from_db = await ReceivingCredential.get(id_account);
+    let response_from_db = await ReceivingCredential.get(id_account);
 
     // If exists throw error 409 - Conflict
     throwIfDatabaseResourceExists(response_from_db, 'id_account');
+
+    // Check if row with uuid already exists
+    response_from_db = await ReceivingCredential.getUUID(uuid);
+
+    // If exists throw error 409 - Conflict
+    throwIfDatabaseResourceExists(response_from_db, 'uuid');
 
     await ReceivingCredential.create(id_account, uuid, username);
 
