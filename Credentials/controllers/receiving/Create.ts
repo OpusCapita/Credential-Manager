@@ -32,6 +32,12 @@ export const createReceive = async (req: HttpRequest) => {
     // If exists throw error 409 - Conflict
     throwIfDatabaseResourceExists(response_from_db, 'uuid');
 
+    // Check if row with uuid already exists
+    response_from_db = await ReceivingCredential.getUsername(username);
+
+    // If exists throw error 409 - Conflict
+    throwIfDatabaseResourceExists(response_from_db, 'username');
+
     await ReceivingCredential.create(id_account, uuid, username);
 
     return {

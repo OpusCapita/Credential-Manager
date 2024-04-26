@@ -98,6 +98,32 @@ export default class ReceivingCredential {
     }
 
     /**
+     * Get object
+     * @param {string} username - Client username
+     * @return {object} - Return object from DB
+     **/
+    static getUsername = async (username: string) => {
+        // Define the query
+        const query = new AzureStorage.TableQuery().where('username eq ?', username);
+
+        // Get objects from DB
+        const results: any = await new Promise((resolve, reject) => {
+            this.table_service.queryEntities(this.table_name, query, null, (error, result) => {
+                if (error) {
+                    ErrorLogs.insert({}, `Problem when trying to get object: ${error}`, '--- Get Receiving Credentials ---');
+
+                    reject(error);
+                }
+                else {
+                    resolve(result);
+                }
+            });
+        });
+
+        return results.entries[0];
+    }
+
+    /**
      * Retrieves all receiving credentials from the database.
      * @returns {Promise<Array<{ uuid: string, id_account: string, username: string }>>} A promise that resolves to an array of receiving credentials.
      */
